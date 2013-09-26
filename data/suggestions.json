@@ -1,0 +1,44 @@
+[
+    {
+        "slug": "jQuery",
+        "link": "http://jquery.com/",
+        "icon": "images/jquery/jQuery_Logo_On_Dark.svg",
+        "color":{
+            "primary": "#333333",
+            "secondary": "#7ACEF4"
+        },
+        "hook":{
+            "main": "54.7% of the top 10,000 websites use ||||slugslug||||, and you could too.",
+            "alt": "Come on: write less, do more with ||||slugslug||||."
+        }
+
+    },
+    {
+        "slug": "Sammy.js",
+        "link": "http://sammyjs.org/",
+        "icon": "images/sammyjs/sammy-logo-header-large.png",
+        "color":{
+            "primary": "#8F4A1D",
+            "secondary": "#212121"
+        },
+        "hook":{
+            "main": "A small web framework with class. ||||slugslug||||",
+            "alt": "||||slugslug|||| is a tiny JavaScript framework developed to ease the pain and provide a basic structure for developing JavaScript applications."
+        }
+
+    },
+    {
+        "slug": "Moment.js",
+        "link": "http://momentjs.com/",
+        "icon": "images/momentjs/momentjs.svg",
+        "color":{
+            "primary": "#F5F5F5",
+            "secondary": "#222222"
+        },
+        "hook":{
+            "main": "||||slugslug||||: A javascript date library for parsing, validating, manipulating, and formatting dates.",
+            "alt": "If you don't use ||||slugslug|||| to do date and time manipulation for you, you're a masochist."
+        }
+
+    }
+]

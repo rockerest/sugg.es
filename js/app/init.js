@@ -4,7 +4,7 @@ define(
         var Init = {};
 
         Init.startApp = function(){
-            Dom.bindEventHandlers();
+            Dom.bindEventHandlers( Ui.scaleImage, Ui.newSuggestion);
             Dom.captureState();
             Ui.bindVisuals();
             $(function(){

@@ -1,8 +1,7 @@
 define(
-    ["jquery", "data", "jquery-color", "qtip"],
-    function( $, Data ){
-        var Ui = {},
-            maxWidth;
+    ["jquery", "data", "dom", "jquery-color", "qtip"],
+    function( $, Data, Dom ){
+        var Ui = {};
 
         Ui.suggest = function( suggestion ){
             var link        = $("<a></a>")
@@ -10,9 +9,10 @@ define(
                     .html( suggestion.slug ),
                 hook        = suggestion.hook[ ( Math.floor( Math.random() * 2 ) ) == 1 ? "alt" : "main" ],
                 wrap        = $( "<div></div>" ).append( link ),
-                goToDark    = Ui.isColorTooLight( suggestion.color.primary ) ? true : false;
-
-            maxWidth    = 0;
+                goToDark    = Ui.isColorTooLight( suggestion.color.primary ) ? true : false,
+                img         = Dom.createImage( suggestion.icon ),
+                maxH        = Dom.getMaximumImageHeight(),
+                maxW        = Dom.getMaximumImageWidth();
 
             $( "body" ).css({
                 "color": suggestion.color.primary
@@ -25,10 +25,9 @@ define(
             Ui.adjustContrast( goToDark );
 
             $( "#slug" ).html( wrap.clone().html() );
-            $( "#graphic a img" ).prop({
-                "src": suggestion.icon,
-                "alt": suggestion.slug
-            });
+
+            Ui.swapImage( suggestion, maxW, maxH );
+
             $( "#graphic a" ).prop({
                 "href": suggestion.link,
                 "title": suggestion.slug
@@ -36,9 +35,6 @@ define(
 
             $( "#hook" ).html( hook.replace( "||||slugslug||||", wrap.clone().html() ) );
 
-            // first time scales it once and gets us a hook into the height after dom paint
-            Ui.scaleImage();
-            // second time uses the REAL (DOM) height instead of the image dimensions and scales down if necessary
             Ui.scaleImage();
         };
 
@@ -48,26 +44,42 @@ define(
             Ui.suggest( suggestion );
         };
 
-        Ui.scaleImage = function(){
-            var aTag    = $( "#graphic a" ).width();
-                maxH    = $( "#graphic" ).height(),
-                img     = $( "#graphic a img" ),
-                imgH    = img.height();
+        Ui.swapImage = function( suggestion, maxW, maxH ){
+            var $img    = $( "#graphic a img" );
 
-            if( imgH > maxH ){
-                img.width( '' );
-                img.height( maxH );
-                maxWidth = img.width();
+            $img
+                .css({
+                    "height": maxH,
+                    "width": ""
+                })
+                .prop({
+                    "src": suggestion.icon,
+                    "alt": suggestion.slug
+                });
+
+            if( $img.width() > maxW ){
+                $img.css({
+                    "height": "",
+                    "width": maxW
+                });
             }
-            else{
-                img.height( '' );
-                if( aTag < maxWidth || maxWidth === 0 ){
-                    img.width( aTag );
-                }
-                else{
-                    img.width( '' );
-                    img.height( maxH );
-                }
+        };
+
+        Ui.scaleImage = function(){
+            var maxH    = Dom.getMaximumImageHeight(),
+                maxW    = Dom.getMaximumImageWidth(),
+                $img    = $( "#graphic a img" );
+
+            $img.css({
+                "width": maxW,
+                "height": ""
+            });
+
+            if( $img.height() > maxH ){
+                $img.css({
+                    "height": maxH,
+                    "width": ""
+                });
             }
         };
 

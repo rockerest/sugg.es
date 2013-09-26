@@ -2,7 +2,7 @@
     {
         "slug": "jQuery",
         "link": "http://jquery.com/",
-        "icon": "images/jquery/jQuery_Logo_On_Dark.svg",
+        "icon": "images/jquery/jQuery_Logo.svg",
         "color":{
             "primary": "#333333",
             "secondary": "#7ACEF4"

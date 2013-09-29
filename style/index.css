@@ -50,3 +50,8 @@ a{
 
     width: 92%;
 }
+
+#graphic img{
+    max-height: 100%;
+    max-width: 100%;
+}

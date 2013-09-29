@@ -48,39 +48,24 @@ define(
             var $img    = $( "#graphic a img" );
 
             $img
-                .css({
-                    "height": maxH,
-                    "width": ""
-                })
                 .prop({
                     "src": suggestion.icon,
                     "alt": suggestion.slug
                 });
-
-            if( $img.width() > maxW ){
-                $img.css({
-                    "height": "",
-                    "width": maxW
-                });
-            }
         };
 
         Ui.scaleImage = function(){
-            var maxH    = Dom.getMaximumImageHeight(),
-                maxW    = Dom.getMaximumImageWidth(),
-                $img    = $( "#graphic a img" );
+            var maxW    = Dom.getMaximumImageWidth(),
+                maxH    = Dom.getMaximumImageHeight(),
+                $img    = $( "#graphic a img" ),
+                ratio   = [maxW / $img.width(), maxH / $img.height() ];
+
+            ratio = Math.min(ratio[0], ratio[1]);
 
             $img.css({
-                "width": maxW,
+                "width": $img.width() * ratio,
                 "height": ""
             });
-
-            if( $img.height() > maxH ){
-                $img.css({
-                    "height": maxH,
-                    "width": ""
-                });
-            }
         };
 
         Ui.isColorTooLight = function( hex ){
